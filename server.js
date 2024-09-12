@@ -12,7 +12,7 @@ const app = express()
 mongoose.connect(dbConfig.DB_URL)
 const db = mongoose.connection
 
-db.on("error",()=>{
+db.on("error",()=>{ 
     console.log("Error while connecting to the database")
 })
 
@@ -22,8 +22,9 @@ db.on("open", ()=>{
 })
 
 let init = async()=>{
+    let user
     try{
-        let user = await userModel.findOne({userType : "ADMIN"})
+        user = await userModel.findOne({userType : "ADMIN"})
     }catch(err){
         console.log("Error while reading data from database",err)
     }
