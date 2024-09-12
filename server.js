@@ -1,13 +1,16 @@
 import express from 'express'
 import mongoose from 'mongoose'
+import bcrypt from "bcryptjs"
 import serverConfig from './configs/server.config.js'
 import dbConfig from './configs/db.config.js'
 import userModel from "./models/user.model.js"
-import bcrypt from "bcryptjs"
+
+import authRouter from './routes/auth.route.js'
 
 //start the server
 const app = express()
-
+app.use(express.json())
+authRouter(app);
 //create an admin user at the starting of the application (if not present already)
 mongoose.connect(dbConfig.DB_URL)
 const db = mongoose.connection
